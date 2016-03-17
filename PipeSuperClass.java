@@ -1,140 +1,147 @@
 package game;
 
 public class PipeSuperClass {
-	protected int side1;
-	protected int side2;
-	protected int side3;
-	protected int side4;
+	protected boolean side1;
+	protected boolean side2;
+	protected boolean side3;
+	protected boolean side4;
 	PipeSuperClass(){	
 	}
-
+	
+	boolean compareEmpty(PipeSuperClass piece) {
+		if(piece instanceof Empty == true)
+			return true;
+		else
+			return false;
+	}
 }
 
 class NoPipes extends PipeSuperClass{
 	
-	boolean side1 = false;
-	boolean side2 = false;
-	boolean side3 = false;
-	boolean side4 = false;
-	
 	NoPipes(){
 		super();
+		side1 = false;
+		side2 = false;
+		side3 = false;
+		side4 = false;
 	}	
 
 }
 
-class PipeStart extends PipeSuperClass{
+class Empty extends PipeSuperClass {
+	
+	Empty(){
+		super();
+		side1 = false;
+		side2 = false;
+		side3 = false;
+		side4 = false;
+	}
+}
 
-	boolean side1 = false;
-	boolean side2 = true;
-	boolean side3 = false;
-	boolean side4 = false;
+class PipeStart extends PipeSuperClass{
 	
 	PipeStart(){
 		super();
+		side1 = false;
+		side2 = true;
+		side3 = false;
+		side4 = false;
 	}
 	
 }
 
 class PipeEnding extends PipeSuperClass{
-
-	boolean side1 = false;
-	boolean side2 = false;
-	boolean side3 = false;
-	boolean side4 = true;
-	
 	
 	PipeEnding(){
 		super();
+		side1 = false;
+		side2 = false;
+		side3 = false;
+		side4 = true;
 	}
 	
 }
 
 class PipeES extends PipeSuperClass{
 	
-	boolean side1 = false;
-	boolean side2 = true;
-	boolean side3 = true;
-	boolean side4 = false;
-	
 	PipeES(){
 		super();
+		side1 = false;
+		side2 = true;
+		side3 = true;
+		side4 = false;
 	}
 
 }
 
 class PipeEW extends PipeSuperClass{
 	
-	boolean side1 = false;
-	boolean side2 = true;
-	boolean side3 = false;
-	boolean side4 = true;
-	
-	
 	PipeEW(){
 		super();
+		side1 = false;
+		side2 = true;
+		side3 = false;
+		side4 = true;
 	}
 
 }
 
 class PipeNE extends PipeSuperClass{
-	boolean side1 = true;
-	boolean side2 = true;
-	boolean side3 = false;
-	boolean side4 = false;
 	
 	PipeNE(){	
 		super();
+		side1 = true;
+		side2 = true;
+		side3 = false;
+		side4 = false;
 	}
 	
 }
 
 class PipeNESW extends PipeSuperClass{
-
-	boolean side1 = true;
-	boolean side2 = true;
-	boolean side3 = true;
-	boolean side4 = true;
 	
 	PipeNESW(){	
 		super();
+		side1 = true;
+		side2 = true;
+		side3 = true;
+		side4 = true;
 	}
 	
 }
 
 class PipeNS extends PipeSuperClass {
-	boolean side1 = true;
-	boolean side2 = false;
-	boolean side3 = true;
-	boolean side4 = false;
 	
 	PipeNS(){
 		super();
+		side1 = true;
+		side2 = false;
+		side3 = true;
+		side4 = false;
 	}
 		
 }
 
 class PipeNW extends PipeSuperClass{
-	boolean side1 = true;
-	boolean side2 = false;
-	boolean side3 = false;
-	boolean side4 = true;
-	
 	
 	PipeNW(){
 		super();
+		side1 = true;
+		side2 = false;
+		side3 = false;
+		side4 = true;
 	}
 		
 }
 
 class PipeSW extends PipeSuperClass{
-
-	boolean side1 = false;
-	boolean side2 = false;
-	boolean side3 = true;
-	boolean side4 = true;
 	
 	PipeSW(){
 		super();
+		side1 = false;
+		side2 = false;
+		side3 = true;
+		side4 = true;
 	}
 }

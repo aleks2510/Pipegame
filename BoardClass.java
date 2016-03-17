@@ -2,15 +2,136 @@ package game;
 
 public class BoardClass {
 	//Generate the Board
-	PipeSuperClass [][] board = new PipeSuperClass [5][5];
+	PipeSuperClass [][] gameBoard = new PipeSuperClass [5][5];
+	PiecesAvailable available = new PiecesAvailable();
+	
+	BoardClass() {
+	}
+	
+	void printBoard() {
+		for(int i=0; i<6; i++) {
+			if(i == 0)
+				System.out.println("    1  2  3  4  5");
+			else {
+				for(int j=0; j<6; j++) {
+					if(j == 0 && i == 1)
+						System.out.printf("%d =", i);
+					else if(j == 0)
+						System.out.printf("%d  ", i);
+					else {
+						System.out.printf("[");
+						printValue(i-1, j-1);
+						System.out.printf("]");
+						if(i == 5 && j == 5)
+							System.out.println("=");
+						else if(j == 5)
+							System.out.println("");
+					}
+				}
+			}
+		}
+		
+		System.out.println("\nPieces Available");
+		available.printAvailable();
+		System.out.println("");
+	}
+	
+	boolean checkAnswer() {
+		boolean answer = true;
+		
+		//Left to Right
+		for(int i=0; i<4; i++){
+			for(int j=0; j<4; j++){
+				boolean compare = compareLeftRight(gameBoard[i][j], gameBoard[i][j+1]);
+				if(compare == false){
+					answer = false;
+					break;
+				}
+			}
+			if(answer == false)
+				break;
+		}
+		
+		//Top to Bottom
+		for(int i=0; i<4; i++){
+			if(answer == false)
+				break;
+			for(int j=0; j<4; j++){
+				boolean compare = compareTopBottom(gameBoard[i][j], gameBoard[i+1][j]);
+				if(compare == false){
+					answer = false;
+					break;
+				}
+			}
+			if(answer == false)
+				break;
+		}
+		
+		return answer;
+	}
+	
+	static boolean compareLeftRight(PipeSuperClass pieceLeft, PipeSuperClass pieceRight) {
+		if(pieceLeft.side2 == pieceRight.side4)
+			return true;
+		else
+			return false;
+	}
+	
+	static boolean compareTopBottom (PipeSuperClass pieceTop, PipeSuperClass pieceBottom) {
+		if(pieceTop.side3 == pieceBottom.side1)
+			return true;
+		else
+			return false;
+	}
+	
+	boolean checkCompleted() {
+		boolean complete = true;
+		
+		for(int i=0; i<25; i++){
+			PipeSuperClass temp = available.getPiece(i);
+			if(temp.compareEmpty(temp) == false){
+				complete = false;
+				break;
+			}
+		}
+		
+		return complete;
+	}
+	
+	void addPiece(int row, int column, int piece) {
+		Empty replace = new Empty();
+		gameBoard[row][column] = available.getPiece(piece-1);
+		available.append(piece-1, replace);
+	}
+	
+	void printValue(int row, int column) {
+		PipeSuperClass value = new PipeSuperClass();
+		value = gameBoard[row][column];
+		
+		if(value instanceof PipeES)
+			System.out.printf("r");
+		else if(value instanceof PipeEW)
+			System.out.printf("-");
+		else if(value instanceof PipeNE)
+			System.out.printf("L");
+		else if(value instanceof PipeNS)
+			System.out.printf("|");
+		else if(value instanceof PipeNW)
+			System.out.printf("j");
+		else if(value instanceof PipeSW)
+			System.out.printf("\u00AC");
+		else if(value instanceof PipeNESW)
+			System.out.printf("+");
+		else
+			System.out.printf(" ");
+	}
+
 }
 
 class EasyBoard extends BoardClass {
 	
 	EasyBoard() {
 		super();
-		
-		PiecesAvailable available = new PiecesAvailable();
 		
 		PipeES ES1 = new PipeES(); available.append(0, ES1);
 		PipeES ES2 = new PipeES(); available.append(1, ES2);
@@ -45,6 +166,7 @@ class EasyBoard extends BoardClass {
 		
 		NoPipes None = new NoPipes(); available.append(24, None);
 	}
+	
 }
 
 class MediumBoard extends BoardClass {
@@ -55,6 +177,8 @@ class DifficultBoard extends BoardClass {
 	
 }
 
+
+//NEW CLASS PiecesAvailable
 class PiecesAvailable {
 	PipeSuperClass[] storage = new PipeSuperClass[25];
 	
@@ -65,6 +189,10 @@ class PiecesAvailable {
 		return storage;
 	}
 	
+	PipeSuperClass getPiece(int index) {
+		return storage[index];
+	}
+	
 	void append(int index, PipeSuperClass piece) {
 		storage[index] = piece;
 	}
@@ -72,23 +200,23 @@ class PiecesAvailable {
 	void printAvailable() {
 		for(int i=0; i<storage.length; i++) {
 			if(storage[i] instanceof PipeES)
-				System.out.printf("");
+				System.out.printf("%d: r", i+1);
 			else if(storage[i] instanceof PipeEW)
-				System.out.printf("");
-			else if(storage[i] instanceof PipeEW)
-				System.out.printf("");
+				System.out.printf("%d: -", i+1);
 			else if(storage[i] instanceof PipeNE)
-				System.out.printf("");
+				System.out.printf("%d: L", i+1);
 			else if(storage[i] instanceof PipeNS)
-				System.out.printf("|");
+				System.out.printf("%d: |", i+1);
 			else if(storage[i] instanceof PipeNW)
-				System.out.printf("");
+				System.out.printf("%d: j", i+1);
 			else if(storage[i] instanceof PipeSW)
-				System.out.printf("");
+				System.out.printf("%d: \u00AC", i+1);
 			else if(storage[i] instanceof PipeNESW)
-				System.out.printf("+");
+				System.out.printf("%d: +", i+1);
 			else if(storage[i] instanceof NoPipes)
-				System.out.printf("[]");
+				System.out.printf("%d: [ ]", i+1);
+			else
+				System.out.printf("%d:  ", i+1);
 			
 			if(i == 10 || i == 20)
 				System.out.println("");
