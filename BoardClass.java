@@ -12,7 +12,7 @@ public class BoardClass {
 		System.out.println("");
 		for(int i=0; i<6; i++) {
 			if(i == 0)
-				System.out.println("    1  2  3  4  5");
+				System.out.println("    0  1  2  3  4");
 			else {
 				for(int j=0; j<6; j++) {
 					if(j == 0 && i == 1)
@@ -41,9 +41,10 @@ public class BoardClass {
 		boolean answer = true;
 		
 		//Left to Right
-		for(int i=0; i<4; i++){
+		for(int i=0; i<5; i++){
 			for(int j=0; j<4; j++){
 				boolean compare = compareLeftRight(gameBoard[i][j], gameBoard[i][j+1]);
+				//This is the one that causes the problem!
 				if(compare == false){
 					answer = false;
 					break;
@@ -54,13 +55,16 @@ public class BoardClass {
 		}
 		
 		//Top to Bottom
+		
 		for(int i=0; i<4; i++){
 			if(answer == false)
 				break;
-			for(int j=0; j<4; j++){
+			for(int j=0; j<5; j++){
 				boolean compare = compareTopBottom(gameBoard[i][j], gameBoard[i+1][j]);
 				if(compare == false){
+					
 					answer = false;
+					
 					break;
 				}
 			}
@@ -72,14 +76,14 @@ public class BoardClass {
 	}
 	
 	static boolean compareLeftRight(PipeSuperClass pieceLeft, PipeSuperClass pieceRight) {
-		if(pieceLeft.side2 == pieceRight.side4)
+		if(pieceLeft.isSide2() == pieceRight.isSide4())
 			return true;
 		else
 			return false;
 	}
 	
 	static boolean compareTopBottom (PipeSuperClass pieceTop, PipeSuperClass pieceBottom) {
-		if(pieceTop.side3 == pieceBottom.side1)
+		if(pieceTop.isSide3() == pieceBottom.isSide1())
 			return true;
 		else
 			return false;

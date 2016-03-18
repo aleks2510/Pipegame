@@ -8,7 +8,10 @@ public class PipeStart extends PipeSuperClass{
 	boolean side4 = false;
 	
 	PipeStart(){
-		
+		setSide1(false);
+		setSide2(true);
+		setSide3(false);
+		setSide4(false);
 	}
 	
 }
