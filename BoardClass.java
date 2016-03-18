@@ -9,6 +9,7 @@ public class BoardClass {
 	}
 	
 	void printBoard() {
+		System.out.println("");
 		for(int i=0; i<6; i++) {
 			if(i == 0)
 				System.out.println("    1  2  3  4  5");
@@ -100,8 +101,14 @@ public class BoardClass {
 	
 	void addPiece(int row, int column, int piece) {
 		Empty replace = new Empty();
-		gameBoard[row][column] = available.getPiece(piece-1);
+		gameBoard[row-1][column-1] = available.getPiece(piece-1);
 		available.append(piece-1, replace);
+	}
+	
+	void takePiece(int row, int column) {
+		Empty replace = new Empty();
+		available.putBack((gameBoard[row-1][column-1]));
+		gameBoard[row-1][column-1] = replace;
 	}
 	
 	void printValue(int row, int column) {
@@ -197,6 +204,13 @@ class PiecesAvailable {
 		storage[index] = piece;
 	}
 	
+	void putBack(PipeSuperClass piece) {
+		for(int i=0; i<25; i++)
+			if(storage[i] instanceof Empty) {
+				storage[i] = piece;
+			}
+	}
+	
 	void printAvailable() {
 		for(int i=0; i<storage.length; i++) {
 			if(storage[i] instanceof PipeES)
@@ -215,8 +229,8 @@ class PiecesAvailable {
 				System.out.printf("%d: +", i+1);
 			else if(storage[i] instanceof NoPipes)
 				System.out.printf("%d: [ ]", i+1);
-			else
-				System.out.printf("%d:  ", i+1);
+			else if(storage[i] instanceof Empty)
+				System.out.printf("");
 			
 			if(i == 10 || i == 20)
 				System.out.println("");
