@@ -1,4 +1,6 @@
 package game;
+import game.PipeSuperClass;
+
 
 public class BoardClass {
 	//Generate the Board
@@ -9,16 +11,15 @@ public class BoardClass {
 	}
 	
 	void printBoard() {
-		System.out.println("");
 		for(int i=0; i<6; i++) {
 			if(i == 0)
-				System.out.println("    1  2  3  4  5");
+				System.out.println("    0  1  2  3  4");
 			else {
 				for(int j=0; j<6; j++) {
 					if(j == 0 && i == 1)
-						System.out.printf("%d =", i);
+						System.out.printf("%d =", i-1);
 					else if(j == 0)
-						System.out.printf("%d  ", i);
+						System.out.printf("%d  ", i-1);
 					else {
 						System.out.printf("[");
 						printValue(i-1, j-1);
@@ -101,14 +102,8 @@ public class BoardClass {
 	
 	void addPiece(int row, int column, int piece) {
 		Empty replace = new Empty();
-		gameBoard[row-1][column-1] = available.getPiece(piece-1);
+		gameBoard[row][column] = available.getPiece(piece-1);
 		available.append(piece-1, replace);
-	}
-	
-	void takePiece(int row, int column) {
-		Empty replace = new Empty();
-		available.putBack((gameBoard[row-1][column-1]));
-		gameBoard[row-1][column-1] = replace;
 	}
 	
 	void printValue(int row, int column) {
@@ -133,6 +128,8 @@ public class BoardClass {
 			System.out.printf(" ");
 	}
 
+	
+	
 }
 
 class EasyBoard extends BoardClass {
@@ -173,6 +170,7 @@ class EasyBoard extends BoardClass {
 		
 		NoPipes None = new NoPipes(); available.append(24, None);
 	}
+
 	
 }
 
@@ -203,14 +201,7 @@ class PiecesAvailable {
 	void append(int index, PipeSuperClass piece) {
 		storage[index] = piece;
 	}
-	
-	void putBack(PipeSuperClass piece) {
-		for(int i=0; i<25; i++)
-			if(storage[i] instanceof Empty) {
-				storage[i] = piece;
-			}
-	}
-	
+	//This method will display how many pieces you still have aviable
 	void printAvailable() {
 		for(int i=0; i<storage.length; i++) {
 			if(storage[i] instanceof PipeES)
@@ -229,8 +220,8 @@ class PiecesAvailable {
 				System.out.printf("%d: +", i+1);
 			else if(storage[i] instanceof NoPipes)
 				System.out.printf("%d: [ ]", i+1);
-			else if(storage[i] instanceof Empty)
-				System.out.printf("");
+			else
+				System.out.printf("%d:  ", i+1);
 			
 			if(i == 10 || i == 20)
 				System.out.println("");
@@ -239,4 +230,3 @@ class PiecesAvailable {
 		}
 	}
 }
-
