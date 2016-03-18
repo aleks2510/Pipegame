@@ -16,9 +16,9 @@ public class BoardClass {
 			else {
 				for(int j=0; j<6; j++) {
 					if(j == 0 && i == 1)
-						System.out.printf("%d =", i-1);
+						System.out.printf("%d =", i);
 					else if(j == 0)
-						System.out.printf("%d  ", i-1);
+						System.out.printf("%d  ", i);
 					else {
 						System.out.printf("[");
 						printValue(i-1, j-1);
@@ -101,14 +101,14 @@ public class BoardClass {
 	
 	void addPiece(int row, int column, int piece) {
 		Empty replace = new Empty();
-		gameBoard[row][column] = available.getPiece(piece-1);
+		gameBoard[row-1][column-1] = available.getPiece(piece-1);
 		available.append(piece-1, replace);
 	}
 	
 	void takePiece(int row, int column) {
 		Empty replace = new Empty();
 		available.putBack((gameBoard[row-1][column-1]));
-		gameBoard[row][column] = replace;
+		gameBoard[row-1][column-1] = replace;
 	}
 	
 	void printValue(int row, int column) {
@@ -210,7 +210,7 @@ class MediumBoard extends BoardClass {
 		PipeSW SW2 = new PipeSW(); available.append(21, SW2);
 		PipeSW SW3 = new PipeSW(); available.append(22, SW3);
 		
-		PipeNESW NESW1 = new PipeNESW(); gameBoard[3][3] = NESW1;
+		PipeNESW NESW1 = new PipeNESW(); gameBoard[2][2] = NESW1;
 		
 		NoPipes None = new NoPipes(); available.append(23, None);
 		
@@ -252,8 +252,8 @@ class DifficultBoard extends BoardClass {
 		PipeSW SW1 = new PipeSW(); available.append(21, SW1);
 		PipeSW SW2 = new PipeSW(); available.append(22, SW2);
 		
-		PipeNESW NESW1 = new PipeNESW(); gameBoard[2][2] = NESW1;
-		PipeNESW NESW2 = new PipeNESW(); gameBoard[4][3] = NESW2;
+		PipeNESW NESW1 = new PipeNESW(); gameBoard[1][1] = NESW1;
+		PipeNESW NESW2 = new PipeNESW(); gameBoard[3][2] = NESW2;
 		
 		Empty Empty1 = new Empty(); available.append(23, Empty1);
 		available.append(24, Empty1);
@@ -315,3 +315,4 @@ class PiecesAvailable {
 		}
 	}
 }
+
