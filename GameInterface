@@ -44,14 +44,79 @@ public class GameInterface {
 	}
 
 	private static void mediumLevel() {
+		Scanner input = new Scanner(System.in);
+		int row;
+		int column;
+		int piece;
 		System.out.println("This is the medium Level");
 		MediumBoard board = new MediumBoard();
+		while (board.checkCompleted() == false) {
+			board.printBoard();
+			if (board.checkCompleted() == false) {
+				System.out
+						.println("What piece do you want to add to your board?");
+				row = input.nextInt();
+				column = input.nextInt();
+				piece = input.nextInt();
+				//While the number of columns or row are bigger or equal to 5 you will have to put a real number
+				
+				if(row >=5 || column >=5){
+					System.out.println("Please enter a real number");
+					row = input.nextInt();
+					column = input.nextInt();
+					piece = input.nextInt();
+					board.addPiece(row, column, piece);
+				}
+				else{				
+					board.addPiece(row, column, piece);
+				}
+			}
+		}
+		board.printBoard();
+		if (board.checkAnswer() == true) {
+			System.out.println("You lost");
+		} else {
+			System.out.println("You won");
+			input.close();
+		}
 
 	}
 
 	private static void hardLevel() {
-		System.out.println("This is the difficult Level");
+		Scanner input = new Scanner(System.in);
+		int row;
+		int column;
+		int piece;
+		System.out.println("This is the medium Level");
 		DifficultBoard board = new DifficultBoard();
+		while (board.checkCompleted() == false) {
+			board.printBoard();
+			if (board.checkCompleted() == false) {
+				System.out
+						.println("What piece do you want to add to your board?");
+				row = input.nextInt();
+				column = input.nextInt();
+				piece = input.nextInt();
+				//While the number of columns or row are bigger or equal to 5 you will have to put a real number
+				
+				if(row >=5 || column >=5){
+					System.out.println("Please enter a real number");
+					row = input.nextInt();
+					column = input.nextInt();
+					piece = input.nextInt();
+					board.addPiece(row, column, piece);
+				}
+				else{				
+					board.addPiece(row, column, piece);
+				}
+			}
+		}
+		if (board.checkAnswer() == true) {
+			System.out.println("You lost");
+		} else {
+			System.out.println("You won");
+			input.close();
+		}
 
 	}
 
@@ -60,7 +125,6 @@ public class GameInterface {
 		int row;
 		int column;
 		int piece;
-		boolean a = false;
 		System.out.println("This is the easy Level");
 		EasyBoard board = new EasyBoard();
 		while (board.checkCompleted() == false) {
@@ -85,7 +149,7 @@ public class GameInterface {
 				}
 			}
 		}
-		if (board.checkAnswer() == false) {
+		if (board.checkAnswer() == true) {
 			System.out.println("You lost");
 		} else {
 			System.out.println("You won");
