@@ -12,13 +12,13 @@ public class BoardClass {
 		System.out.println("");
 		for(int i=0; i<6; i++) {
 			if(i == 0)
-				System.out.println("    0  1  2  3  4");
+				System.out.println("    1  2  3  4  5");
 			else {
 				for(int j=0; j<6; j++) {
 					if(j == 0 && i == 1)
-						System.out.printf("%d =", i-1);
+						System.out.printf("%d =", i);
 					else if(j == 0)
-						System.out.printf("%d  ", i-1);
+						System.out.printf("%d  ", i);
 					else {
 						System.out.printf("[");
 						printValue(i-1, j-1);
@@ -101,14 +101,14 @@ public class BoardClass {
 	
 	void addPiece(int row, int column, int piece) {
 		Empty replace = new Empty();
-		gameBoard[row][column] = available.getPiece(piece-1);
+		gameBoard[row-1][column-1] = available.getPiece(piece-1);
 		available.append(piece-1, replace);
 	}
 	
 	void takePiece(int row, int column) {
 		Empty replace = new Empty();
-		available.putBack((gameBoard[row][column]));
-		gameBoard[row][column] = replace;
+		available.putBack((gameBoard[row-1][column-1]));
+		gameBoard[row-1][column-1] = replace;
 	}
 	
 	void printValue(int row, int column) {
@@ -178,10 +178,86 @@ class EasyBoard extends BoardClass {
 
 class MediumBoard extends BoardClass {
 	
+	MediumBoard(){
+		super();
+		
+		PipeES ES1 = new PipeES(); available.append(0, ES1);
+		PipeES ES2 = new PipeES(); available.append(1, ES2);
+		PipeES ES3 = new PipeES(); available.append(2, ES3);
+		PipeES ES4 = new PipeES(); available.append(3, ES4);
+		PipeES ES5 = new PipeES(); available.append(4, ES5);
+		
+		PipeEW EW1 = new PipeEW(); available.append(5, EW1);
+		PipeEW EW2 = new PipeEW(); available.append(6, EW2);
+		PipeEW EW3 = new PipeEW(); available.append(7, EW3);
+		PipeEW EW4 = new PipeEW(); available.append(8, EW4);
+		PipeEW EW5 = new PipeEW(); available.append(9, EW5);
+		PipeEW EW6 = new PipeEW(); available.append(10, EW6);
+		
+		PipeNE NE1 = new PipeNE(); available.append(11, NE1);
+		PipeNE NE2 = new PipeNE(); available.append(12, NE2);
+		PipeNE NE3 = new PipeNE(); available.append(13, NE3);
+		
+		PipeNS NS1 = new PipeNS(); available.append(14, NS1);
+		
+		PipeNW NW1 = new PipeNW(); available.append(15, NW1);
+		PipeNW NW2 = new PipeNW(); available.append(16, NW2);
+		PipeNW NW3 = new PipeNW(); available.append(17, NW3);
+		PipeNW NW4 = new PipeNW(); available.append(18, NW4);
+		PipeNW NW5 = new PipeNW(); available.append(19, NW5);
+		
+		PipeSW SW1 = new PipeSW(); available.append(20, SW1);
+		PipeSW SW2 = new PipeSW(); available.append(21, SW2);
+		PipeSW SW3 = new PipeSW(); available.append(22, SW3);
+		
+		PipeNESW NESW1 = new PipeNESW(); gameBoard[3][3] = NESW1;
+		
+		NoPipes None = new NoPipes(); available.append(23, None);
+		
+		Empty Empty1 = new Empty(); available.append(24, Empty1);
+	}
 }
 
 class DifficultBoard extends BoardClass {
 	
+	DifficultBoard(){
+		super();
+		
+		PipeES ES1 = new PipeES(); available.append(0, ES1);
+		PipeES ES2 = new PipeES(); available.append(1, ES2);
+		PipeES ES3 = new PipeES(); available.append(2, ES3);
+		PipeES ES4 = new PipeES(); available.append(3, ES4);
+		PipeES ES5 = new PipeES(); available.append(4, ES5);
+		PipeES ES6 = new PipeES(); available.append(5, ES6);
+		PipeES ES7 = new PipeES(); available.append(6, ES7);
+		
+		PipeEW EW1 = new PipeEW(); available.append(7, EW1);
+		PipeEW EW2 = new PipeEW(); available.append(8, EW2);
+		PipeEW EW3 = new PipeEW(); available.append(9, EW3);
+		PipeEW EW4 = new PipeEW(); available.append(10, EW4);
+		PipeEW EW5 = new PipeEW(); available.append(11, EW5);
+		
+		PipeNE NE1 = new PipeNE(); available.append(12, NE1);
+		PipeNE NE2 = new PipeNE(); available.append(13, NE2);
+		
+		PipeNS NS1 = new PipeNS(); available.append(14, NS1);
+		
+		PipeNW NW1 = new PipeNW(); available.append(15, NW1);
+		PipeNW NW2 = new PipeNW(); available.append(16, NW2);
+		PipeNW NW3 = new PipeNW(); available.append(17, NW3);
+		PipeNW NW4 = new PipeNW(); available.append(18, NW4);
+		PipeNW NW5 = new PipeNW(); available.append(19, NW5);
+		PipeNW NW6 = new PipeNW(); available.append(20, NW6);
+		
+		PipeSW SW1 = new PipeSW(); available.append(21, SW1);
+		PipeSW SW2 = new PipeSW(); available.append(22, SW2);
+		
+		PipeNESW NESW1 = new PipeNESW(); gameBoard[2][2] = NESW1;
+		PipeNESW NESW2 = new PipeNESW(); gameBoard[4][3] = NESW2;
+		
+		Empty Empty1 = new Empty(); available.append(23, Empty1);
+		available.append(24, Empty1);
+	}
 }
 
 
@@ -239,3 +315,4 @@ class PiecesAvailable {
 		}
 	}
 }
+
