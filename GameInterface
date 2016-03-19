@@ -58,16 +58,16 @@ public class GameInterface {
 				row = input.nextInt();
 				column = input.nextInt();
 				piece = input.nextInt();
-				//While the number of columns or row are bigger or equal to 5 you will have to put a real number
-				
-				if(row >=5 || column >=5){
+				// While the number of columns or row are bigger or equal to 5
+				// you will have to put a real number
+
+				if (row >= 5 || column >= 5) {
 					System.out.println("Please enter a real number");
 					row = input.nextInt();
 					column = input.nextInt();
 					piece = input.nextInt();
-					board.addPiece(row, column, piece);
-				}
-				else{				
+
+				} else {
 					board.addPiece(row, column, piece);
 				}
 			}
@@ -97,16 +97,16 @@ public class GameInterface {
 				row = input.nextInt();
 				column = input.nextInt();
 				piece = input.nextInt();
-				//While the number of columns or row are bigger or equal to 5 you will have to put a real number
-				
-				if(row >=5 || column >=5){
+				// While the number of columns or row are bigger or equal to 5
+				// you will have to put a real number
+
+				if (row >= 5 || column >= 5) {
 					System.out.println("Please enter a real number");
 					row = input.nextInt();
 					column = input.nextInt();
 					piece = input.nextInt();
-					board.addPiece(row, column, piece);
-				}
-				else{				
+
+				} else {
 					board.addPiece(row, column, piece);
 				}
 			}
@@ -135,24 +135,25 @@ public class GameInterface {
 				row = input.nextInt();
 				column = input.nextInt();
 				piece = input.nextInt();
-				//While the number of columns or row are bigger or equal to 5 you will have to put a real number
-				
-				if(row >=5 || column >=5){
+
+				// While the number of columns or row are bigger or equal to 5
+				// you will have to put a real number
+
+				if (row >= 5 || column >= 5 || piece > 25) {
 					System.out.println("Please enter a real number");
 					row = input.nextInt();
 					column = input.nextInt();
 					piece = input.nextInt();
-					board.addPiece(row, column, piece);
-				}
-				else{				
+
+				} else {
 					board.addPiece(row, column, piece);
 				}
 			}
 		}
 		if (board.checkAnswer() == true) {
-			System.out.println("You lost");
-		} else {
 			System.out.println("You won");
+		} else {
+			System.out.println("You lost");
 			input.close();
 		}
 
