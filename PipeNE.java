@@ -1,12 +1,13 @@
 package game;
-//This kind of pipe is NE following the NESF patter
+//This class creates an object of the superclass PipeSuperClass called PipeNE
+//the sides are positioned in the cardinal way.
 public class PipeNE extends PipeSuperClass{
-	boolean side1 = true;
-	boolean side2 = true;
-	boolean side3 = false;
-	boolean side4 = false;
+
 	PipeNE(){
-		
+		setSide1(true);
+		setSide2(true);
+		setSide3(false);
+		setSide4(false);	
 	}
 	
 
