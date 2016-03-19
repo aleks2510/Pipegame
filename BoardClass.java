@@ -1,24 +1,27 @@
 package game;
 
 public class BoardClass {
-	//Generate the Board
+	//Generate the Board of 5 x 5 spaces
 	PipeSuperClass [][] gameBoard = new PipeSuperClass [5][5];
 	PiecesAvailable available = new PiecesAvailable();
 	
+	
+	//Non-arg constructor 
 	BoardClass() {
 	}
 	
+	//This method is going to print the table with the values 0-4  in the top and side.
 	void printBoard() {
 		System.out.println("");
 		for(int i=0; i<6; i++) {
 			if(i == 0)
-				System.out.println("    1  2  3  4  5");
+				System.out.println("    0  1  2  3  4");
 			else {
 				for(int j=0; j<6; j++) {
 					if(j == 0 && i == 1)
-						System.out.printf("%d =", i);
+						System.out.printf("%d =", i-1);
 					else if(j == 0)
-						System.out.printf("%d  ", i);
+						System.out.printf("%d  ", i-1);
 					else {
 						System.out.printf("[");
 						printValue(i-1, j-1);
@@ -36,12 +39,12 @@ public class BoardClass {
 		available.printAvailable();
 		System.out.println("");
 	}
-	
+	//This method is going to check if all the answers on the board matches to the main answer.
 	boolean checkAnswer() {
 		boolean answer = true;
 		
-		//Left to Right
-		for(int i=0; i<4; i++){
+		//Checking values Left to Right
+		for(int i=0; i<5; i++){
 			for(int j=0; j<4; j++){
 				boolean compare = compareLeftRight(gameBoard[i][j], gameBoard[i][j+1]);
 				if(compare == false){
@@ -53,14 +56,17 @@ public class BoardClass {
 				break;
 		}
 		
-		//Top to Bottom
+		//Check values Top to Bottom
+		
 		for(int i=0; i<4; i++){
 			if(answer == false)
 				break;
-			for(int j=0; j<4; j++){
+			for(int j=0; j<5; j++){
 				boolean compare = compareTopBottom(gameBoard[i][j], gameBoard[i+1][j]);
 				if(compare == false){
+					
 					answer = false;
+					
 					break;
 				}
 			}
@@ -70,21 +76,21 @@ public class BoardClass {
 		
 		return answer;
 	}
-	
+	//This method is comparing the 2 pieces that are next to each other horizontally.
 	static boolean compareLeftRight(PipeSuperClass pieceLeft, PipeSuperClass pieceRight) {
-		if(pieceLeft.side2 == pieceRight.side4)
+		if(pieceLeft.isSide2() == pieceRight.isSide4())
 			return true;
 		else
 			return false;
 	}
-	
+	//This method is comparing the 2 pieces that are next to each other vertically
 	static boolean compareTopBottom (PipeSuperClass pieceTop, PipeSuperClass pieceBottom) {
-		if(pieceTop.side3 == pieceBottom.side1)
+		if(pieceTop.isSide3() == pieceBottom.isSide1())
 			return true;
 		else
 			return false;
 	}
-	
+	//This method is checks if all the pieces in the board are filled 
 	boolean checkCompleted() {
 		boolean complete = true;
 		
@@ -98,19 +104,21 @@ public class BoardClass {
 		
 		return complete;
 	}
-	
+	//This method is going to create an empty value, pass a number in that one and replace the value in the board with that one
+	//the available piece is deleted in your board.   
 	void addPiece(int row, int column, int piece) {
 		Empty replace = new Empty();
-		gameBoard[row-1][column-1] = available.getPiece(piece-1);
+		gameBoard[row][column] = available.getPiece(piece-1);
 		available.append(piece-1, replace);
 	}
-	
+	//This method is going to allow the user to take any placed piece from the board.
 	void takePiece(int row, int column) {
 		Empty replace = new Empty();
 		available.putBack((gameBoard[row-1][column-1]));
-		gameBoard[row-1][column-1] = replace;
+		gameBoard[row][column] = replace;
 	}
 	
+	//This method is going to print a character for each piece.
 	void printValue(int row, int column) {
 		PipeSuperClass value = new PipeSuperClass();
 		value = gameBoard[row][column];
@@ -134,7 +142,7 @@ public class BoardClass {
 	}
 
 }
-
+//This class is going to create a board called EasyBoard which will display a board with 25 pieces to solve the easy board.
 class EasyBoard extends BoardClass {
 	
 	EasyBoard() {
@@ -175,7 +183,7 @@ class EasyBoard extends BoardClass {
 	}
 	
 }
-
+//This class is going to create a board called MediumBoard which will display a board with 25 pieces to solve the easy board.
 class MediumBoard extends BoardClass {
 	
 	MediumBoard(){
@@ -260,22 +268,22 @@ class DifficultBoard extends BoardClass {
 	}
 }
 
-
-//NEW CLASS PiecesAvailable
+//This class creates an object that allows 25 available pieces.
 class PiecesAvailable {
 	PipeSuperClass[] storage = new PipeSuperClass[25];
 	
 	PiecesAvailable() {
 	}
 	
+	//This is the getter to the available class.
 	PipeSuperClass[] getAvailable() {
 		return storage;
 	}
-	
+	//This is the setter of the getPieces
 	PipeSuperClass getPiece(int index) {
 		return storage[index];
 	}
-	
+	//This method allows you to add an piece to the class.
 	void append(int index, PipeSuperClass piece) {
 		storage[index] = piece;
 	}
@@ -286,7 +294,7 @@ class PiecesAvailable {
 				storage[i] = piece;
 			}
 	}
-	
+	//This method prints the available pieces in the game.
 	void printAvailable() {
 		for(int i=0; i<storage.length; i++) {
 			if(storage[i] instanceof PipeES)
@@ -315,4 +323,3 @@ class PiecesAvailable {
 		}
 	}
 }
-
