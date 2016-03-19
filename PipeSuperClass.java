@@ -1,12 +1,17 @@
+//This class is the Super class PipeSuperClass, and it will create a all false side as the default object.
 package game;
 
 public class PipeSuperClass {
-	protected boolean side1;
-	protected boolean side2;
-	protected boolean side3;
-	protected boolean side4;
+	private boolean side1 = false;
+	private boolean side2 = false;
+	private boolean side3 = false;
+	private boolean side4 = false;
 	PipeSuperClass(){	
 	}
+	
+	
+	
+	
 	
 	boolean compareEmpty(PipeSuperClass piece) {
 		if(piece instanceof Empty == true)
@@ -14,134 +19,73 @@ public class PipeSuperClass {
 		else
 			return false;
 	}
-}
 
-class NoPipes extends PipeSuperClass{
-	
-	NoPipes(){
-		super();
-		side1 = false;
-		side2 = false;
-		side3 = false;
-		side4 = false;
-	}	
 
-}
 
-class Empty extends PipeSuperClass {
-	
-	Empty(){
-		super();
-		side1 = false;
-		side2 = false;
-		side3 = false;
-		side4 = false;
-	}
-}
 
-class PipeStart extends PipeSuperClass{
-	
-	PipeStart(){
-		super();
-		side1 = false;
-		side2 = true;
-		side3 = false;
-		side4 = false;
-	}
-	
-}
 
-class PipeEnding extends PipeSuperClass{
-	
-	PipeEnding(){
-		super();
-		side1 = false;
-		side2 = false;
-		side3 = false;
-		side4 = true;
-	}
-	
-}
-
-class PipeES extends PipeSuperClass{
-	
-	PipeES(){
-		super();
-		side1 = false;
-		side2 = true;
-		side3 = true;
-		side4 = false;
+	protected boolean isSide2() {
+		return side2;
 	}
 
-}
 
-class PipeEW extends PipeSuperClass{
-	
-	PipeEW(){
-		super();
-		side1 = false;
-		side2 = true;
-		side3 = false;
-		side4 = true;
+
+
+
+	protected void setSide2(boolean side2) {
+		this.side2 = side2;
 	}
 
-}
 
-class PipeNE extends PipeSuperClass{
-	
-	PipeNE(){	
-		super();
-		side1 = true;
-		side2 = true;
-		side3 = false;
-		side4 = false;
-	}
-	
-}
 
-class PipeNESW extends PipeSuperClass{
-	
-	PipeNESW(){	
-		super();
-		side1 = true;
-		side2 = true;
-		side3 = true;
-		side4 = true;
-	}
-	
-}
 
-class PipeNS extends PipeSuperClass {
-	
-	PipeNS(){
-		super();
-		side1 = true;
-		side2 = false;
-		side3 = true;
-		side4 = false;
-	}
-		
-}
 
-class PipeNW extends PipeSuperClass{
-	
-	PipeNW(){
-		super();
-		side1 = true;
-		side2 = false;
-		side3 = false;
-		side4 = true;
+	protected boolean isSide1() {
+		return side1;
 	}
-		
-}
 
-class PipeSW extends PipeSuperClass{
-	
-	PipeSW(){
-		super();
-		side1 = false;
-		side2 = false;
-		side3 = true;
-		side4 = true;
+
+
+
+
+	protected void setSide1(boolean side1) {
+		this.side1 = side1;
 	}
+
+
+
+
+
+	protected boolean isSide3() {
+		return side3;
+	}
+
+
+
+
+
+	protected void setSide3(boolean side3) {
+		this.side3 = side3;
+	}
+
+
+
+
+
+	protected boolean isSide4() {
+		return side4;
+	}
+
+
+
+
+
+	protected void setSide4(boolean side4) {
+		this.side4 = side4;
+	}
+
+
+
+
+
 }
